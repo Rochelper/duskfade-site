@@ -374,6 +374,306 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ============================================
+   META CARDS (Hero 3 cards: DEVELOPER/RELEASE/FOCUS)
+   ============================================ */
+.meta-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 760px;
+  margin: 36px 0 0;
+  padding: 0;
+}
+
+.meta-card {
+  background: rgba(15, 15, 15, 0.78);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.meta-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.meta-value {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--gold);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+/* ============================================
+   DATA STRIP (5-column Steam data, MECCHA style)
+   ============================================ */
+.data-strip {
+  background: linear-gradient(180deg, #0d0d0d 0%, #060606 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 20px 22px;
+  text-align: center;
+}
+
+.data-strip-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.data-cell {
+  padding: 4px 12px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.data-cell:last-child { border-right: none; }
+
+.data-num {
+  font-size: 1.7rem;
+  color: var(--gold);
+  font-weight: 800;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.data-cap {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.data-source {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin: 18px 0 0;
+}
+
+.data-source a {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+.data-source a:hover { color: #fff; }
+
+/* ============================================
+   KEYWORD HUB (Tabletop Tavern SEO structure)
+   ============================================ */
+.keyword-hub {
+  background: linear-gradient(180deg, #0a0a0a 0%, #0d0a08 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  margin: 32px 0;
+}
+
+.keyword-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.keyword-header h2 {
+  font-size: 1.85rem;
+  color: var(--text-bright);
+  margin: 8px 0 6px;
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+.badge-yellow {
+  display: inline-block;
+  background: rgba(244, 211, 94, 0.15);
+  color: #f4d35e;
+  border: 1px solid rgba(244, 211, 94, 0.4);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin: 0 0 24px;
+  max-width: 760px;
+  line-height: 1.55;
+}
+
+.btn-compact {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.kw-card {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.kw-card:hover {
+  border-color: var(--gold);
+  background: rgba(244, 211, 94, 0.04);
+  transform: translateY(-2px);
+}
+
+.kw-card h3 {
+  font-size: 1.02rem;
+  color: var(--text-bright);
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.kw-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ============================================
+   SCENARIO CHOICE (4 cards)
+   ============================================ */
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.scenario-card {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.scenario-card:hover {
+  border-color: var(--gold);
+  background: rgba(244, 211, 94, 0.05);
+  transform: translateY(-2px);
+}
+
+.scn-icon {
+  font-size: 1.6rem;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.scenario-card h4 {
+  font-size: 1.1rem;
+  color: var(--text-bright);
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+}
+
+.scenario-card p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.scn-arrow {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   CONTENT GROUPS (3-column, Tabletop Tavern style)
+   ============================================ */
+.content-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.content-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-title {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+
+.group-card {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.group-card:hover {
+  border-color: var(--gold);
+  transform: translateX(3px);
+}
+
+.group-card h4 {
+  font-size: 0.98rem;
+  color: var(--text-bright);
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+}
+
+.group-card p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ============================================
    MAIN CONTAINER
    ============================================ */
 .container {
@@ -1095,6 +1395,13 @@ footer a { color: var(--accent); }
   .hero { min-height: 540px; padding: 60px 16px 50px; }
   .about-screenshots { grid-template-columns: 1fr; }
   .screenshot-gallery { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .meta-cards { grid-template-columns: 1fr; max-width: 100%; }
+  .data-strip-inner { grid-template-columns: repeat(2, 1fr); row-gap: 18px; }
+  .data-cell:nth-child(2n) { border-right: none; }
+  .keyword-grid { grid-template-columns: 1fr; }
+  .scenarios-grid { grid-template-columns: 1fr; }
+  .content-groups { grid-template-columns: 1fr; }
+  .keyword-header { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 640px) {
@@ -1110,4 +1417,9 @@ footer a { color: var(--accent); }
   .page-hero { min-height: 260px; }
   .screenshot-gallery { grid-template-columns: 1fr; }
   .trailer-play-btn { width: 56px; height: 56px; }
+  .data-strip-inner { grid-template-columns: 1fr; }
+  .data-cell { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+  .data-cell:last-child { border-bottom: none; }
+  .keyword-hub { padding: 20px; }
+  .keyword-header h2 { font-size: 1.4rem; }
 }
