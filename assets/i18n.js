@@ -342,26 +342,42 @@
      GOOGLE TRANSLATE WIDGET — 全页正文翻译兜底
      ============================================================ */
 
+  /* ============================================================
+     GOOGLE TRANSLATE COOKIE — 全页正文翻译兜底
+
+     原理：
+       1. Google Translate Element 脚本会根据 `googtrans` cookie
+          决定是否自动翻译页面。
+       2. 用户切换语言时，我们设置 cookie 然后刷新页面；脚本在
+          页面加载时读取 cookie 并自动完成整页翻译。
+       3. 切回英文时清除 cookie 并刷新，页面恢复原始英文。
+       4. data-i18n 在 DOMContentLoaded 时再次应用，覆盖/补充
+          导航、按钮、标题等关键 UI 的中文/日文/西文。
+     ============================================================ */
+
   let googleTranslateLoaded = false;
-  let googleTranslateReady = false;
-  const pendingQueue = [];
+
+  function injectGoogleTranslateStyles() {
+    const id = 'i18n-gt-hide-styles';
+    if (document.getElementById(id)) return;
+    const style = document.createElement('style');
+    style.id = id;
+    style.textContent = `
+      .goog-te-banner-frame.skiptranslate { display: none !important; }
+      body { top: 0 !important; position: static !important; }
+      .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+      .goog-text-highlight { background: none !important; box-shadow: none !important; }
+      #google_translate_element { display: none !important; height: 0 !important; }
+      .skiptranslate iframe, .goog-te-gadget, .goog-te-gadget-simple { display: none !important; }
+    `;
+    document.head.appendChild(style);
+  }
 
   function loadGoogleTranslate() {
     if (googleTranslateLoaded) return;
     googleTranslateLoaded = true;
 
-    // 隐藏 Google Translate 默认 UI（我们用自己的下拉菜单触发）
-    const style = document.createElement('style');
-    style.textContent = `
-      .goog-te-banner-frame.skiptranslate { display: none !important; }
-      body { top: 0 !important; }
-      .goog-tooltip { display: none !important; }
-      .goog-tooltip:hover { display: none !important; }
-      .goog-text-highlight { background: none !important; box-shadow: none !important; }
-      #google_translate_element { display: none !important; }
-      .skiptranslate iframe, .goog-te-gadget { display: none !important; }
-    `;
-    document.head.appendChild(style);
+    injectGoogleTranslateStyles();
 
     window.googleTranslateElementInit = function () {
       try {
@@ -372,24 +388,16 @@
           autoDisplay: false,
           multilanguagePage: true
         }, 'google_translate_element');
-        googleTranslateReady = true;
-        // 处理排队的语言切换请求
-        while (pendingQueue.length) {
-          const cb = pendingQueue.shift();
-          cb();
-        }
       } catch (e) {
         console.warn('[i18n] Google Translate init failed:', e);
       }
     };
 
-    // 隐藏容器
     const container = document.createElement('div');
     container.id = 'google_translate_element';
     container.style.display = 'none';
     document.body.appendChild(container);
 
-    // 异步加载 translate_a/element.js
     const script = document.createElement('script');
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
@@ -400,33 +408,36 @@
     document.body.appendChild(script);
   }
 
-  function translatePageContent(lang) {
-    if (lang === 'en') {
-      // 切回英文：恢复到原状
-      const select = document.querySelector('.goog-te-combo');
-      if (select && select.value !== '') {
-        select.value = '';
-        select.dispatchEvent(new Event('change'));
-        // 刷新页面以彻底还原（Google Translate 修改了 DOM）
-        setTimeout(() => location.reload(), 50);
-      }
-      return;
+  function getCookieDomain() {
+    const host = location.hostname;
+    if (!host || host === 'localhost' || host === '127.0.0.1') return '';
+    // 同时写入根域和当前域，确保生效
+    return host.replace(/^www\./, '');
+  }
+
+  function setGoogTransCookie(lang) {
+    const target = GOOGLE_LANG_MAP[lang] || lang;
+    const value = '/en/' + target;
+    const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+    const domain = getCookieDomain();
+    document.cookie = 'googtrans=' + value + '; path=/; expires=' + expires;
+    if (domain) {
+      document.cookie = 'googtrans=' + value + '; path=/; domain=.' + domain + '; expires=' + expires;
     }
-    // 非英语：注入翻译
-    const doTranslate = () => {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        const target = GOOGLE_LANG_MAP[lang] || lang;
-        if (select.value !== target) {
-          select.value = target;
-          select.dispatchEvent(new Event('change'));
-        }
-      } else {
-        console.warn('[i18n] Google Translate widget not ready. data-i18n still applied.');
-      }
-    };
-    if (googleTranslateReady) doTranslate();
-    else pendingQueue.push(doTranslate);
+  }
+
+  function clearGoogTransCookie() {
+    const expires = 'Thu, 01 Jan 1970 00:00:00 UTC';
+    const domain = getCookieDomain();
+    document.cookie = 'googtrans=; path=/; expires=' + expires;
+    if (domain) {
+      document.cookie = 'googtrans=; path=/; domain=.' + domain + '; expires=' + expires;
+    }
+  }
+
+  function getGoogTransCookie() {
+    const m = document.cookie.match(/(?:^|; )googtrans=([^;]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
   }
 
   /* ============================================================
@@ -443,12 +454,21 @@
 
   function setLang(lang) {
     if (!LANGS.includes(lang)) lang = 'en';
+    if (lang === getLang()) return;
+
     try { localStorage.setItem('duskfade-lang', lang); } catch (e) { /* ignore */ }
-    applyLang(lang);
+
+    // 通过 cookie + reload 让 Google Translate 在页面加载时自动翻译/还原
+    if (lang === 'en') {
+      clearGoogTransCookie();
+    } else {
+      setGoogTransCookie(lang);
+    }
+    location.reload();
   }
 
   function applyLang(lang) {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
 
     // 1. 应用 data-i18n 精细翻译
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
@@ -469,22 +489,13 @@
       sel.value = lang;
     });
 
-    // 3. 全页正文翻译（Google Translate widget）
+    // 3. 非英语时显示提示，并确保 Google Translate 脚本已加载
     if (lang !== 'en') {
-      loadGoogleTranslate();
-      translatePageContent(lang);
       showI18nNotice(lang);
+      loadGoogleTranslate();
     } else {
       hideI18nNotice();
-      // 退出翻译状态
-      translatePageContent('en');
     }
-
-    // 4. 更新标题/OG tags（可选）
-    try {
-      const langSel = { zh: 'zh-CN', ja: 'ja', es: 'es', en: 'en' };
-      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
-    } catch (e) { /* ignore */ }
   }
 
   /* ============================================================
@@ -497,7 +508,7 @@
     const langNames = { zh: '中文', ja: '日本語', es: 'Español' };
     notice.style.display = 'flex';
     notice.innerHTML =
-      '<span>🌐 已切换至 <strong>' + (langNames[lang] || lang) + '</strong>。整页正文正在通过 Google 翻译加载… 如有问题可点击这里查看 <a class="i18n-translate-link" href="' + buildGTUrl(lang) + '" target="_blank" rel="noopener">Google 翻译版</a></span>' +
+      '<span>🌐 已切换至 <strong>' + (langNames[lang] || lang) + '</strong>。页面已刷新并由 Google 翻译自动加载整页译文。如显示不完整，可点击 <a class="i18n-translate-link" href="' + buildGTUrl(lang) + '" target="_blank" rel="noopener">Google 翻译版</a></span>' +
       '<button id="i18n-close" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:1.1rem;padding:0 4px;" title="关闭">✕</button>';
 
     const closeBtn = document.getElementById('i18n-close');
