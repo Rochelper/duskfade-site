@@ -35,19 +35,21 @@
     </a>
 
     <div class="main-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="boss-guide.html">Bosses</a>
-      <a href="walkthrough.html">Walkthrough</a>
-      <a href="collectibles.html">Collectibles</a>
-      <a href="weapons.html">Weapons</a>
-      <a href="tier-list.html">Tier List</a>
-      <a href="beginner-guide.html">Beginner</a>
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="boss-guide.html" data-i18n="nav.bosses">Bosses</a>
+      <a href="walkthrough.html" data-i18n="nav.walkthrough">Walkthrough</a>
+      <a href="collectibles.html" data-i18n="nav.collectibles">Collectibles</a>
+      <a href="weapons.html" data-i18n="nav.weapons">Weapons</a>
+      <a href="tier-list.html" data-i18n="nav.tierlist">Tier List</a>
+      <a href="beginner-guide.html" data-i18n="nav.beginner">Beginner</a>
     </div>
 
     <div class="topbar-right">
-      <select class="lang-switcher" aria-label="Language">
-        <option>English</option>
-        <option>中文</option>
+      <select class="lang-switcher" aria-label="Language" data-i18n-skip>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="es">Español</option>
       </select>
       <a href="https://store.steampowered.com/app/2542020/Duskfade/" class="btn-steam" target="_blank" rel="noopener">🎮 Steam</a>
     </div>
@@ -57,47 +59,47 @@
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
-    <span class="hero-badge">Fan-Made Community Wiki</span>
+    <span class="hero-badge" data-i18n="hero.badge">Fan-Made Community Wiki</span>
 
     <h1 class="hero-title">
       <span class="hero-title-main">Duskfade</span><br>
       <span class="hero-title-accent">Wiki</span>
     </h1>
 
-    <p class="hero-desc">
+    <p class="hero-desc" data-i18n-html="hero.desc">
       Shatter the shackles of time as you jump, swing, and slash through a fantastic world.
       Zirian, accompanied by his mechanical Cuckoo, must save his sister from a mysterious
       Clock Tower that has plunged the land into eternal night.
     </p>
 
     <div class="hero-actions">
-      <a href="beginner-guide.html" class="btn btn-primary">Start Beginner Guide →</a>
-      <a href="boss-guide.html" class="btn btn-outline">Boss Strategies</a>
-      <a href="collectibles.html" class="btn btn-outline">Collectible Maps</a>
+      <a href="beginner-guide.html" class="btn btn-primary" data-i18n="hero.btn1">Start Beginner Guide →</a>
+      <a href="boss-guide.html" class="btn btn-outline" data-i18n="hero.btn2">Boss Strategies</a>
+      <a href="collectibles.html" class="btn btn-outline" data-i18n="hero.btn3">Collectible Maps</a>
     </div>
 
-    <a href="#trailer" class="trailer-link">Watch Official Trailer</a>
+    <a href="#trailer" class="trailer-link" data-i18n="hero.trailer">Watch Official Trailer</a>
 
     <div class="stats-bar">
       <div class="stat-card">
-        <span class="stat-value">Released</span>
-        <span class="stat-label">Aug 13, 2026</span>
+        <span class="stat-value" data-i18n="stat1.value">Released</span>
+        <span class="stat-label" data-i18n="stat1.label">Aug 13, 2026</span>
       </div>
       <div class="stat-card">
         <span class="stat-value">$23.99</span>
-        <span class="stat-label">20% off at launch</span>
+        <span class="stat-label" data-i18n="stat2.label">20% off at launch</span>
       </div>
       <div class="stat-card">
         <span class="stat-value">5</span>
-        <span class="stat-label">Main Bosses</span>
+        <span class="stat-label" data-i18n="stat3.label">Main Bosses</span>
       </div>
       <div class="stat-card">
         <span class="stat-value">25</span>
-        <span class="stat-label">Achievements</span>
+        <span class="stat-label" data-i18n="stat4.label">Achievements</span>
       </div>
       <div class="stat-card">
         <span class="stat-value">100%</span>
-        <span class="stat-label">Free &amp; Updated</span>
+        <span class="stat-label" data-i18n="stat5.label">Free &amp; Updated</span>
       </div>
     </div>
   </div>
@@ -110,37 +112,37 @@
   <section class="section">
     <div class="section-header">
       <span class="section-bar">▶</span>
-      <h2>Start Here</h2>
+      <h2 data-i18n="sec.starthere">Start Here</h2>
     </div>
-    <p style="color:var(--text-dim); margin-bottom:24px;">New to Duskfade? Begin with these essential guides.</p>
+    <p style="color:var(--text-dim); margin-bottom:24px;" data-i18n="sec.starthere_desc">New to Duskfade? Begin with these essential guides.</p>
 
     <div class="card-grid">
       <a href="beginner-guide.html" class="card">
-        <span class="card-tag">Beginner</span>
-        <h3>Beginner's Guide</h3>
-        <p>Master the time-freeze dodge, learn combat basics, and survive your first hour.</p>
-        <span class="card-arrow">Read more →</span>
+        <span class="card-tag" data-i18n="card1.tag">Beginner</span>
+        <h3 data-i18n="card1.title">Beginner's Guide</h3>
+        <p data-i18n="card1.desc">Master the time-freeze dodge, learn combat basics, and survive your first hour.</p>
+        <span class="card-arrow" data-i18n="card1.arrow">Read more →</span>
       </a>
 
       <a href="boss-guide.html" class="card">
-        <span class="card-tag">Bosses</span>
-        <h3>Boss Strategies</h3>
-        <p>All 5 bosses with phase-by-phase tactics: Wrath, Sorrow, Fear, Jealousy, Despair.</p>
-        <span class="card-arrow">Read more →</span>
+        <span class="card-tag" data-i18n="card2.tag">Bosses</span>
+        <h3 data-i18n="card2.title">Boss Strategies</h3>
+        <p data-i18n="card2.desc">All 5 bosses with phase-by-phase tactics: Wrath, Sorrow, Fear, Jealousy, Despair.</p>
+        <span class="card-arrow" data-i18n="card2.arrow">Read more →</span>
       </a>
 
       <a href="walkthrough.html" class="card">
-        <span class="card-tag">Walkthrough</span>
-        <h3>Full Walkthrough</h3>
-        <p>Complete story walkthrough from Clock Tower to the final confrontation.</p>
-        <span class="card-arrow">Read more →</span>
+        <span class="card-tag" data-i18n="card3.tag">Walkthrough</span>
+        <h3 data-i18n="card3.title">Full Walkthrough</h3>
+        <p data-i18n="card3.desc">Complete story walkthrough from Clock Tower to the final confrontation.</p>
+        <span class="card-arrow" data-i18n="card3.arrow">Read more →</span>
       </a>
 
       <a href="collectibles.html" class="card">
-        <span class="card-tag">Collectibles</span>
-        <h3>Collectible Locations</h3>
-        <p>Every hidden item, lore note, and secret collectible mapped out.</p>
-        <span class="card-arrow">Read more →</span>
+        <span class="card-tag" data-i18n="card4.tag">Collectibles</span>
+        <h3 data-i18n="card4.title">Collectible Locations</h3>
+        <p data-i18n="card4.desc">Every hidden item, lore note, and secret collectible mapped out.</p>
+        <span class="card-arrow" data-i18n="card4.arrow">Read more →</span>
       </a>
     </div>
   </section>
@@ -149,7 +151,7 @@
   <section class="section" id="trailer">
     <div class="section-header">
       <span class="section-bar">▶</span>
-      <h2>Official Trailer</h2>
+      <h2 data-i18n="sec.trailer">Official Trailer</h2>
     </div>
 
     <div class="trailer-section">
@@ -157,7 +159,7 @@
         <a href="https://store.steampowered.com/app/2542020/Duskfade/" target="_blank" rel="noopener">
           <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/257398079/2ce234a8306d85a0cdf835775dfc29118aa28892/movie_600x337.jpg" alt="Duskfade Official Trailer" loading="lazy">
           <div class="trailer-play-btn"></div>
-          <div class="trailer-label">Duskfade — Out Now</div>
+          <div class="trailer-label" data-i18n="trailer.label">Duskfade — Out Now</div>
         </a>
       </div>
     </div>
@@ -167,9 +169,9 @@
   <section class="section">
     <div class="section-header">
       <span class="section-bar">◆</span>
-      <h2>Screenshots</h2>
+      <h2 data-i18n="sec.screenshots">Screenshots</h2>
     </div>
-    <p style="color:var(--text-dim); margin-bottom:24px;">Explore the clockpunk world of Duskfade — ethereal forests, underwater realms, sunlit dunes, and cloudy heights.</p>
+    <p style="color:var(--text-dim); margin-bottom:24px;" data-i18n="sec.screenshots_desc">Explore the clockpunk world of Duskfade.</p>
 
     <div class="screenshot-gallery">
       <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2542020/258e28424b24c31f56bcdf8b6ad82a2f5a7dea97/ss_258e28424b24c31f56bcdf8b6ad82a2f5a7dea97.1920x1080.jpg?t=1786631734" target="_blank" rel="noopener">
@@ -203,44 +205,44 @@
   <section class="section">
     <div class="section-header">
       <span class="section-bar">◆</span>
-      <h2>What This Wiki Covers</h2>
+      <h2 data-i18n="sec.features">What This Wiki Covers</h2>
     </div>
 
     <div class="feature-grid">
       <div class="feature-card">
         <div class="feature-icon">⚔️</div>
-        <h3>Weapons</h3>
-        <p>Complete arsenal breakdown with stats and locations.</p>
+        <h3 data-i18n="feat.weapons">Weapons</h3>
+        <p data-i18n="feat.weapons_d">Complete arsenal breakdown with stats and locations.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">✨</div>
-        <h3>Abilities</h3>
-        <p>All unlockable abilities with recommended skill order.</p>
+        <h3 data-i18n="feat.abilities">Abilities</h3>
+        <p data-i18n="feat.abilities_d">All unlockable abilities with recommended skill order.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">🏆</div>
-        <h3>Achievements</h3>
-        <p>25 Steam Achievements unlocked, including missable ones.</p>
+        <h3 data-i18n="feat.achievements">Achievements</h3>
+        <p data-i18n="feat.achievements_d">25 Steam Achievements unlocked, including missable ones.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">📊</div>
-        <h3>Tier List</h3>
-        <p>S / A / B / C ranked weapons and abilities.</p>
+        <h3 data-i18n="feat.tierlist">Tier List</h3>
+        <p data-i18n="feat.tierlist_d">S / A / B / C ranked weapons and abilities.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">👥</div>
-        <h3>Characters</h3>
-        <p>Zirian, Allira, and the lore of the Minutero.</p>
+        <h3 data-i18n="feat.characters">Characters</h3>
+        <p data-i18n="feat.characters_d">Zirian, Allira, and the lore of the Minutero.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">🎮</div>
-        <h3>Demo Guide</h3>
-        <p>Tips for the public demo before launch.</p>
+        <h3 data-i18n="feat.demo">Demo Guide</h3>
+        <p data-i18n="feat.demo_d">Tips for the public demo before launch.</p>
       </div>
     </div>
   </section>
@@ -249,7 +251,7 @@
   <section class="section">
     <div class="section-header">
       <span class="section-bar">◆</span>
-      <h2>About Duskfade</h2>
+      <h2 data-i18n="sec.about">About Duskfade</h2>
     </div>
 
     <p>
@@ -280,7 +282,7 @@
     </p>
 
     <div class="callout">
-      <div class="callout-title">For New Players</div>
+      <div class="callout-title" data-i18n="callout.newplayers_title">For New Players</div>
       <p style="margin:0;">Don't skip the time-freeze tutorial. It's the single most important skill in the game,
       and most bosses have attacks that are nearly impossible to dodge without it. Practice on the Sorrow boss first —
       its slow, telegraphed attacks are perfect for learning the timing.</p>
@@ -306,8 +308,8 @@
     </div>
 
     <p style="margin-top:24px;">
-      <a href="duskfade-review.html" class="btn btn-outline">Read Full Review →</a>
-      <a href="https://store.steampowered.com/app/2542020/Duskfade/" class="btn btn-gold" target="_blank" rel="noopener" style="margin-left:8px;">View on Steam →</a>
+      <a href="duskfade-review.html" class="btn btn-outline" data-i18n="about.btn_review">Read Full Review →</a>
+      <a href="https://store.steampowered.com/app/2542020/Duskfade/" class="btn btn-gold" target="_blank" rel="noopener" style="margin-left:8px;" data-i18n="about.btn_steam">View on Steam →</a>
     </p>
   </section>
 
@@ -316,15 +318,23 @@
 <!-- Footer -->
 <footer>
   <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="duskfade-review.html">Review</a>
-    <a href="sitemap.xml">Sitemap</a>
+    <a href="index.html" data-i18n="footer.home">Home</a>
+    <a href="about.html" data-i18n="footer.about">About</a>
+    <a href="contact.html" data-i18n="footer.contact">Contact</a>
+    <a href="duskfade-review.html" data-i18n="footer.review">Review</a>
+    <a href="sitemap.xml" data-i18n="footer.sitemap">Sitemap</a>
   </div>
-  <div>Duskfade Guide & Wiki — Fan-made resource. Duskfade is a trademark of Weird Beluga.</div>
-  <div class="footer-tag">⏰ The clock never stops. Neither do we.</div>
+  <div data-i18n="footer.disclaimer">Duskfade Guide & Wiki — Fan-made resource. Duskfade is a trademark of Weird Beluga.</div>
+  <div class="footer-tag" data-i18n="footer.tag">⏰ The clock never stops. Neither do we.</div>
 </footer>
 
+<!-- i18n Translation Notice (hidden by default, shown for non-English) -->
+<div id="i18n-notice" style="display:none;">
+  <span data-i18n="notice.text"></span>
+  <a class="i18n-translate-link" href="#" target="_blank" rel="noopener" data-i18n="notice.link"></a>
+</div>
+
+
+<script src="assets/i18n.js"></script>
 </body>
 </html>

@@ -29,21 +29,23 @@
     </a>
 
     <div class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="boss-guide.html">Bosses</a>
-      <a href="walkthrough.html">Walkthrough</a>
-      <a href="collectibles.html">Collectibles</a>
-      <a href="weapons.html">Weapons</a>
-      <a href="tier-list.html">Tier List</a>
-      <a href="beginner-guide.html">Beginner</a>
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="boss-guide.html" data-i18n="nav.bosses">Bosses</a>
+      <a href="walkthrough.html" data-i18n="nav.walkthrough">Walkthrough</a>
+      <a href="collectibles.html" data-i18n="nav.collectibles">Collectibles</a>
+      <a href="weapons.html" data-i18n="nav.weapons">Weapons</a>
+      <a href="tier-list.html" data-i18n="nav.tierlist">Tier List</a>
+      <a href="beginner-guide.html" data-i18n="nav.beginner">Beginner</a>
     </div>
 
     <div class="topbar-right">
-      <select class="lang-switcher" aria-label="Language">
-        <option>English</option>
-        <option>中文</option>
+      <select class="lang-switcher" aria-label="Language" data-i18n-skip>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="es">Español</option>
       </select>
-      <a href="about.html#steam" class="btn-steam">🎮 Steam</a>
+      <a href="https://store.steampowered.com/app/2542020/Duskfade/" class="btn-steam" target="_blank" rel="noopener">🎮 Steam</a>
     </div>
   </div>
 </nav>
@@ -51,8 +53,8 @@
 <!-- Page Hero -->
 <section class="page-hero">
   <img class="page-hero-bg" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2542020/ab230665b8eb7a4f387944c20515930c3435bd95/ss_ab230665b8eb7a4f387944c20515930c3435bd95.1920x1080.jpg?t=1786631734" alt="Duskfade Tier List" loading="lazy">
-  <h1>Tier List</h1>
-  <p>S / A / B / C ranked weapons and abilities</p>
+  <h1 data-i18n="ph.tierlist.title">Tier List</h1>
+  <p data-i18n="ph.tierlist.desc">S / A / B / C ranked weapons and abilities</p>
 </section>
 
 
@@ -340,15 +342,23 @@
 <!-- Footer -->
 <footer>
   <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="duskfade-review.html">Review</a>
-    <a href="sitemap.xml">Sitemap</a>
+    <a href="index.html" data-i18n="footer.home">Home</a>
+    <a href="about.html" data-i18n="footer.about">About</a>
+    <a href="contact.html" data-i18n="footer.contact">Contact</a>
+    <a href="duskfade-review.html" data-i18n="footer.review">Review</a>
+    <a href="sitemap.xml" data-i18n="footer.sitemap">Sitemap</a>
   </div>
-  <div>Duskfade Guide &amp; Wiki — Fan-made resource. Duskfade is a trademark of Weird Beluga.</div>
-  <div class="footer-tag">⏰ The clock never stops. Neither do we.</div>
+  <div data-i18n="footer.disclaimer">Duskfade Guide & Wiki — Fan-made resource. Duskfade is a trademark of Weird Beluga.</div>
+  <div class="footer-tag" data-i18n="footer.tag">⏰ The clock never stops. Neither do we.</div>
 </footer>
 
+<!-- i18n Translation Notice (hidden by default, shown for non-English) -->
+<div id="i18n-notice" style="display:none;">
+  <span data-i18n="notice.text"></span>
+  <a class="i18n-translate-link" href="#" target="_blank" rel="noopener" data-i18n="notice.link"></a>
+</div>
+
+
+<script src="assets/i18n.js"></script>
 </body>
 </html>
