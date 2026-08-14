@@ -27,7 +27,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Segoe UI', -apple-system, Tahoma, sans-serif;
-  background: var(--bg);
+  background:
+    linear-gradient(180deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.98) 100%),
+    url('https://cdn.akamai.steamstatic.com/steam/apps/2542020/library_hero_blur.jpg') center center / cover no-repeat fixed,
+    var(--bg);
   color: var(--text);
   line-height: 1.6;
   margin: 0;
@@ -149,7 +152,7 @@ img { max-width: 100%; height: auto; }
    ============================================ */
 .hero {
   position: relative;
-  min-height: 620px;
+  min-height: 680px;
   padding: 80px 24px 60px;
   display: flex;
   flex-direction: column;
@@ -158,8 +161,8 @@ img { max-width: 100%; height: auto; }
   text-align: center;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.85) 70%, rgba(10,10,10,0.98) 100%),
-    radial-gradient(ellipse at center, #2a1810 0%, #0a0a0a 70%),
+    linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.75) 50%, rgba(10,10,10,0.98) 100%),
+    url('https://cdn.akamai.steamstatic.com/steam/apps/2542020/library_hero.jpg') center center / cover no-repeat,
     var(--bg);
 }
 
@@ -799,6 +802,231 @@ footer a { color: var(--accent); }
 }
 
 /* ============================================
+   PAGE INTRO (Inner page intro text)
+   ============================================ */
+.page-intro {
+  padding: 20px 0 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.page-intro h2 {
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+.page-intro p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   SCREENSHOT GALLERY
+   ============================================ */
+.screenshot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.screenshot-gallery a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--bg-card);
+  transition: all 0.3s;
+}
+
+.screenshot-gallery a:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.screenshot-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s;
+}
+
+.screenshot-gallery a:hover img {
+  opacity: 0.9;
+}
+
+/* ============================================
+   TRAILER / VIDEO SECTION
+   ============================================ */
+.trailer-section {
+  position: relative;
+  margin: 40px 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.trailer-wrapper {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.trailer-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.trailer-wrapper:hover img {
+  opacity: 0.85;
+}
+
+.trailer-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  background: rgba(196, 30, 58, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 3px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 30px rgba(196, 30, 58, 0.5);
+}
+
+.trailer-play-btn:hover {
+  background: var(--danger-bright);
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 40px rgba(196, 30, 58, 0.7);
+}
+
+.trailer-play-btn::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+.trailer-label {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trailer-label::before {
+  content: '▶';
+  color: var(--danger-bright);
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   PAGE HERO (Inner pages with screenshot bg)
+   ============================================ */
+.page-hero {
+  position: relative;
+  min-height: 340px;
+  padding: 60px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.9) 100%);
+  z-index: 1;
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.page-hero h1 {
+  position: relative;
+  z-index: 2;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-bright);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+  margin-bottom: 8px;
+}
+
+.page-hero p {
+  position: relative;
+  z-index: 2;
+  color: var(--text);
+  font-size: 1rem;
+  max-width: 600px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* ============================================
+   ABOUT WITH SCREENSHOTS
+   ============================================ */
+.about-screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.about-screenshot {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16/9;
+}
+
+.about-screenshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.about-screenshot:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
@@ -808,6 +1036,8 @@ footer a { color: var(--accent); }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .hero-title { font-size: 2.5rem; }
   .hero { min-height: 540px; padding: 60px 16px 50px; }
+  .about-screenshots { grid-template-columns: 1fr; }
+  .screenshot-gallery { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
 }
 
 @media (max-width: 640px) {
@@ -819,4 +1049,8 @@ footer a { color: var(--accent); }
   .section-title { font-size: 1.4rem; }
   .main-nav a { padding: 6px 10px; font-size: 0.82rem; }
   .btn { padding: 10px 16px; font-size: 0.88rem; }
+  .page-hero h1 { font-size: 1.8rem; }
+  .page-hero { min-height: 260px; }
+  .screenshot-gallery { grid-template-columns: 1fr; }
+  .trailer-play-btn { width: 56px; height: 56px; }
 }
