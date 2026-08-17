@@ -351,6 +351,16 @@
     'ph.sorrow.desc':      { en: 'The second boss of the Ethereal Forest. Grief, made gentle enough to learn on.', zh: '空灵森林的第二位 Boss。悲伤，温柔得适合练手。', ja: 'エーテル森林の2番目のボス。悲しみ、練習にちょうどいい。', es: 'El segundo jefe del Bosque Etereo. La pena, lo bastante suave para aprender.' },
     'ph.allira.title':     { en: 'Allira',                    zh: '阿莉拉',              ja: 'アリーラ',             es: 'Allira' },
     'ph.allira.desc':      { en: "Zirian's sister, and the reason the journey begins.", zh: '齐利安的妹妹，也是这趟旅程开始的原因。', ja: 'ジリアンの妹、旅の始まりの理由。', es: 'La hermana de Zirian, y la razón por la que empieza el viaje.' },
+    'ph.timefreeze.title': { en: 'The Time-Freeze Dodge',     zh: '时间冻结闪避',        ja: '時間停止回避',         es: 'Esquiva de Congelación Temporal' },
+    'ph.timefreeze.desc':  { en: 'The clockpunk twist the whole combat is built around — and the one skill that turns every boss from a wall into a rhythm.',
+                             zh: '整个战斗系统的钟表朋克核心转折——也是把每个 Boss 从铜墙铁壁变成可破解节奏的那一项技能。',
+                             ja: '戦闘全体の時計朋く核心。すべてのボスを壁からリズムへと変える唯一の技能。',
+                             es: 'El giro clockpunk en el que se basa todo el combate — la habilidad que convierte a cada jefe de muro en ritmo.' },
+    'ph.cuckoo.title':     { en: 'Cuckoo',                    zh: '布谷鸟',              ja: 'カッコウ',             es: 'Cuckoo' },
+    'ph.cuckoo.desc':      { en: "Zirian's sassy mechanical companion — built by Allira, and more useful in a fight than its size suggests.",
+                             zh: '齐利安那只毒舌机械鸟伙伴——由阿莉拉制造，在战斗中比它的体型有用得多。',
+                             ja: 'ジリアンの気の強い機械の相棒 — アリーラが作り、見た目以上に戦闘で役立つ。',
+                             es: 'La sarcástica compañera mecánica de Zirian — construida por Allira y más útil en combate de lo que su tamaño sugiere.' },
 
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
