@@ -361,6 +361,16 @@
                              zh: '齐利安那只毒舌机械鸟伙伴——由阿莉拉制造，在战斗中比它的体型有用得多。',
                              ja: 'ジリアンの気の強い機械の相棒 — アリーラが作り、見た目以上に戦闘で役立つ。',
                              es: 'La sarcástica compañera mecánica de Zirian — construida por Allira y más útil en combate de lo que su tamaño sugiere.' },
+    'ph.zirian.title':     { en: 'Zirian — Character Guide',     zh: '齐利安 — 角色指南',     ja: 'ジリアン — キャラクターガイド', es: 'Zirian — Guía de Personaje' },
+    'ph.zirian.desc':      { en: "Duskfade's protagonist — the apprentice who wields the Minutero to save his sister.",
+                             zh: 'Duskfade 的主角——挥舞时计守护者、誓要拯救妹妹的学徒。',
+                             ja: 'Duskfadeの主人公 — ミヌテロを握り、妹を救う見習い。',
+                             es: 'El protagonista de Duskfade — el aprendiz que empuña el Minutero para salvar a su hermana.' },
+    'ph.fear.title':       { en: 'Fear — Boss Guide',            zh: '恐惧 — Boss 攻略',      ja: 'フィアー — ボス攻略',          es: 'Fear — Guía de Jefe' },
+    'ph.fear.desc':        { en: 'The third boss of the Underwater Realm. Terror made palpable — and the fight that tests your nerve.',
+                             zh: '水下领域的第三位 Boss。恐惧化为实体——一场考验胆量的战斗。',
+                             ja: 'アンダーウォーター・レルムの3番目のボス。恐怖の化身 — 胆力が試される戦い。',
+                             es: 'El tercer jefe del Reino Submarino. El terror hecho palpable — y la pelea que pone a prueba tus nervios.' },
 
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
