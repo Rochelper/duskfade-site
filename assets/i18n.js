@@ -162,6 +162,21 @@
                               zh: '齐利安、阿莉拉、布谷鸟与大师钟表匠的传说。',
                               ja: 'ジリアン、アリーラ、カッコウ、マスター時計師の伝承。',
                               es: 'Zirian, Allira, Cuckoo y la historia de los Maestros Relojeros.' },
+    'hub.kw10':             { en: 'Duskfade Wrath boss',        zh: 'Duskfade 愤怒 Boss',   ja: 'Duskfade レイスボス',     es: 'Jefe Wrath de Duskfade' },
+    'hub.kw10_d':           { en: 'First boss of Mount Cinder — lunge, slam, projectiles, and the hook-shot center phase.',
+                              zh: '熔岩山的第一位 Boss — 突进、砸地、弹幕与钩索中心阶段。',
+                              ja: 'マウント・シンダー最初のボス — 突進、叩きつけ、弾幕、フックショット中心フェーズ。',
+                              es: 'Primer jefe de Mount Cinder — embestida, golpe, proyectiles y fase central de gancho.' },
+    'hub.kw11':             { en: 'Duskfade Sorrow boss',       zh: 'Duskfade 悲伤 Boss',   ja: 'Duskfade ソローボス',     es: 'Jefe Sorrow de Duskfade' },
+    'hub.kw11_d':           { en: 'Second boss in the Ethereal Forest — slow, telegraphed attacks to learn on.',
+                              zh: '空灵森林的第二位 Boss — 缓慢且有明显预兆，适合练手。',
+                              ja: 'エーテル森林の2番目のボス — ゆっくりした予備動作で練習向き。',
+                              es: 'Segundo jefe del Bosque Etereo — ataques lentos y telegrafiados para practicar.' },
+    'hub.kw12':             { en: 'Allira (Duskfade)',          zh: '阿莉拉（Duskfade）',   ja: 'アリーラ（Duskfade）',    es: 'Allira (Duskfade)' },
+    'hub.kw12_d':           { en: "Zirian's sister, imprisoned in the Clock Tower, and the story's emotional core.",
+                              zh: '齐利安的妹妹，被囚于钟楼，也是故事的情感核心。',
+                              ja: 'ジリアンの妹、時計塔に囚われ、物語の感情的核。',
+                              es: 'La hermana de Zirian, prisionera en la Torre del Reloj y el núcleo emocional.' },
 
     /* ===== SCENARIO CHOICE ===== */
     'scn.title':            { en: 'Pick the guide that solves your current problem',
@@ -330,6 +345,12 @@
     'ph.about.desc':       { en: 'About the site and its creator', zh: '关于本站及其创建者', ja: 'サイトと作者について', es: 'Sobre el sitio y su creador' },
     'ph.contact.title':    { en: 'Contact Us',                zh: '联系我们',            ja: 'お問い合わせ',         es: 'Contáctanos' },
     'ph.contact.desc':     { en: 'Get in touch with the team', zh: '与团队取得联系',     ja: 'チームに連絡する',     es: 'Ponte en contacto con el equipo' },
+    'ph.wrath.title':      { en: 'Wrath — Boss Guide',        zh: '愤怒 — Boss 攻略',     ja: 'レイス — ボス攻略',     es: 'Wrath — Guía de Jefe' },
+    'ph.wrath.desc':       { en: 'The first boss of Mount Cinder. Anger made machine.', zh: '熔岩山的第一位 Boss。愤怒化作了机器。', ja: 'マウント・シンダーの最初のボス。怒りの機械。', es: 'El primer jefe de Mount Cinder. La ira hecha máquina.' },
+    'ph.sorrow.title':     { en: 'Sorrow — Boss Guide',       zh: '悲伤 — Boss 攻略',     ja: 'ソロー — ボス攻略',     es: 'Sorrow — Guía de Jefe' },
+    'ph.sorrow.desc':      { en: 'The second boss of the Ethereal Forest. Grief, made gentle enough to learn on.', zh: '空灵森林的第二位 Boss。悲伤，温柔得适合练手。', ja: 'エーテル森林の2番目のボス。悲しみ、練習にちょうどいい。', es: 'El segundo jefe del Bosque Etereo. La pena, lo bastante suave para aprender.' },
+    'ph.allira.title':     { en: 'Allira',                    zh: '阿莉拉',              ja: 'アリーラ',             es: 'Allira' },
+    'ph.allira.desc':      { en: "Zirian's sister, and the reason the journey begins.", zh: '齐利安的妹妹，也是这趟旅程开始的原因。', ja: 'ジリアンの妹、旅の始まりの理由。', es: 'La hermana de Zirian, y la razón por la que empieza el viaje.' },
 
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
@@ -553,4 +574,17 @@
   // 全局切换接口（方便开发者调用）
   window.duskfadeSetLang = setLang;
   window.duskfadeGetLang = getLang;
+
+  /* ============================================================
+     GA4 ENGAGED-READING EVENT
+     阅读满 60 秒触发，便于在 GA4 后台将其标记为“关键事件”
+     （路径：GA4 → 管理 → 关键事件 → 新建 key event = read_60s）
+     ============================================================ */
+  setTimeout(function () {
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', 'read_60s', { page_title: document.title, page_location: location.href });
+      }
+    } catch (e) { /* ignore */ }
+  }, 60000);
 })();
