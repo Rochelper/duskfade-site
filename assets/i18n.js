@@ -372,6 +372,17 @@
                              ja: 'アンダーウォーター・レルムの3番目のボス。恐怖の化身 — 胆力が試される戦い。',
                              es: 'El tercer jefe del Reino Submarino. El terror hecho palpable — y la pelea que pone a prueba tus nervios.' },
 
+    'ph.jealousy.title':    { en: 'Jealousy — Boss Guide',     zh: '嫉妒 — Boss 攻略',   ja: 'ジェラシー — ボス攻略',      es: 'Jealousy — Guía de Jefe' },
+    'ph.jealousy.desc':     { en: 'The fourth boss of the Sun-scorched Dunes. Envy made sharp — and the fight that guards what Zirian fears to lose.',
+                              zh: '烈日炙烤沙丘的第四位 Boss。嫉妒化为锋芒——守护着齐利安害怕失去之物的战斗。',
+                              ja: '灼熱の砂丘の4番目のボス。嫉妬の化身 — ジリアンが失うことを恐れるものを守る戦い。',
+                              es: 'El cuarto jefe de las Dunas Calcinadas por el Sol. Los celos hechos filo — y la pelea que custodia lo que Zirian teme perder.' },
+    'ph.despair.title':      { en: 'Despair — Boss Guide',       zh: '绝望 — Boss 攻略',     ja: 'デスペア — ボス攻略',        es: 'Despair — Guía de Jefe' },
+    'ph.despair.desc':       { en: 'The fifth and final boss of the Clock Tower. Hopelessness made total — the multi-phase finale that stands between Zirian and Allira.',
+                              zh: '钟楼第五位也是最终的 Boss。绝望化为全部——挡在齐利安与阿莉拉之间的多阶段终局之战。',
+                              ja: '時計塔の5番目で最後のボス。絶望の化身 — ジリアンとアリーラの間に立ちふさがる多段階の決戦。',
+                              es: 'El quinto y último jefe de la Torre del Reloj. La desesperación hecha total — la fase múltiple final que se interpone entre Zirian y Allira.' },
+
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
     'btn.viewguide':        { en: 'View Full Guide →',     zh: '查看完整攻略 →',      ja: '完全ガイドを見る →',    es: 'Ver guía completa →' },
