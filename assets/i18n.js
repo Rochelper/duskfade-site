@@ -328,7 +328,7 @@
     'ph.weapons.title':    { en: 'Weapons & Minutero',        zh: '武器与时计守护者',     ja: '武器とミヌテロ',       es: 'Armas y Minutero' },
     'ph.weapons.desc':     { en: 'Complete arsenal and upgrade guide', zh: '完整武器库与升级指南', ja: '全武器と強化ガイド', es: 'Arsenal completo y guía de mejora' },
     'ph.abilities.title':  { en: 'Abilities Guide',           zh: '能力指南',            ja: 'アビリティガイド',      es: 'Guía de habilidades' },
-    'ph.abilities.desc':   { en: 'All unlockable skills and recommended order', zh: '所有可解锁技能与推荐顺序', ja: '全アビリティとおすすめ順', es: 'Todas las habilidades y orden recomendado' },
+    'ph.abilities.desc':   { en: 'All 4 skill-tree branches, gadgets (Grapple/Blast/Chronoblast), Cuckoo support, and the signature time-freeze dodge', zh: '四大技能树分支、各类装置（钩爪/爆发/时弹）、咕咕辅助技能，以及招牌的时间冻结闪避', ja: '4つのスキルツリー、ガジェット（グラップル/ブラスト/クロノブラスト）、カッコウ支援、そして象徴的な時間停止回避', es: 'Las 4 ramas del árbol de habilidades, gadgets (Garra/Explosión/Cronoestallido), apoyo de Cuckoo y la icónica esquiva de congelación temporal' },
     'ph.achievements.title':{en: 'Achievements Guide',        zh: '成就指南',            ja: 'アチーブメントガイド',  es: 'Guía de logros' },
     'ph.achievements.desc':{ en: 'All 25 achievements including missable ones', zh: '全部 25 个成就（含易遗漏）', ja: '全25個のアチーブメント（見逃し含む）', es: 'Los 25 logros incluidos los que se pueden perder' },
     'ph.tierlist.title':   { en: 'Tier List',                 zh: '强度排行榜',          ja: 'ティアリスト',         es: 'Tier List' },
