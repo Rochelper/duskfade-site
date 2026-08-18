@@ -383,6 +383,12 @@
                               ja: '時計塔の5番目で最後のボス。絶望の化身 — ジリアンとアリーラの間に立ちふさがる多段階の決戦。',
                               es: 'El quinto y último jefe de la Torre del Reloj. La desesperación hecha total — la fase múltiple final que se interpone entre Zirian y Allira.' },
 
+    'ph.palette.title':     { en: 'Palette — Character Guide',       zh: '调色师 — 角色攻略',        ja: 'パレット — キャラクター攻略',     es: 'Palette — Guía de Personaje' },
+    'ph.palette.desc':      { en: 'The fashion NPC of Tick Town. Collect cosmetic outfits, dye them with Flasks of Dye, and dazzle Palette with your best look for the "The mask of pain" achievement.',
+                             zh: 'Tick 镇的时尚 NPC。收集外观服装，用染色瓶（Flasks of Dye）染色，并为调色师展示你最靓的造型，解锁“The mask of pain”成就。',
+                             ja: 'ティックタウンのファッション NPC。外観衣装を集め、染色瓶（Flasks of Dye）で染め、パレットに最高の装いを見せて「The mask of pain」達成。',
+                             es: 'La NPC de moda de Ciudad Tick. Reúne atuendos cosméticos, tiñelos con Frascos de Tinte y deslumbra a Palette con tu mejor look para el logro «The mask of pain».' },
+
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
     'btn.viewguide':        { en: 'View Full Guide →',     zh: '查看完整攻略 →',      ja: '完全ガイドを見る →',    es: 'Ver guía completa →' },
