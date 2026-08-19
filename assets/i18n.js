@@ -645,3 +645,65 @@
   }
   window.addEventListener('scroll', _onScroll, { passive: true });
 })();
+
+/* ============================================================
+   COOKIE CONSENT BANNER (GDPR) + ADSTERRA LOAD GATE
+   ============================================================ */
+(function () {
+  var CONSENT_KEY = 'df_cookie_consent';
+
+  // 全站 footer 注入 Privacy 链接（仅一次，跳过已含的页）
+  function injectPrivacyLink() {
+    var links = document.querySelector('.footer-links');
+    if (!links) return;
+    if (links.querySelector('a[href="privacy.html"]')) return;
+    if (location.pathname.indexOf('privacy.html') !== -1) return; // 隐私页不自链
+    var a = document.createElement('a');
+    a.href = 'privacy.html';
+    a.textContent = 'Privacy';
+    links.appendChild(a);
+  }
+  injectPrivacyLink();
+
+  // 已同意 -> 直接加载广告（若用户之前接受过）
+  if (localStorage.getItem(CONSENT_KEY) === 'granted') {
+    loadAdsterraAds();
+    return;
+  }
+  // 已拒绝 -> 不加载任何广告脚本
+  if (localStorage.getItem(CONSENT_KEY) === 'denied') return;
+
+  // 首次访问 -> 显示横幅
+  var bar = document.createElement('div');
+  bar.className = 'cookie-consent';
+  bar.id = 'cookieConsent';
+  bar.innerHTML =
+    '<div class="cc-text">We use cookies for analytics and third-party ads (Adsterra). ' +
+    'See our <a href="privacy.html">Privacy Policy</a>.</div>' +
+    '<div class="cc-btns">' +
+    '<button class="cc-btn cc-decline" id="ccDecline">Decline</button>' +
+    '<button class="cc-btn cc-accept" id="ccAccept">Accept</button>' +
+    '</div>';
+  document.body.appendChild(bar);
+
+  document.getElementById('ccAccept').addEventListener('click', function () {
+    localStorage.setItem(CONSENT_KEY, 'granted');
+    bar.remove();
+    loadAdsterraAds();
+  });
+  document.getElementById('ccDecline').addEventListener('click', function () {
+    localStorage.setItem(CONSENT_KEY, 'denied');
+    bar.remove();
+  });
+})();
+
+/* 用户接受 Cookie 后才注入 Adsterra 广告脚本（GDPR 合规）。
+   等你在 Adsterra 后台拿到代码后，把下面 TODO 替换为对应 <script> 即可。 */
+function loadAdsterraAds() {
+  /* ===== TODO: 粘贴 Adsterra 广告代码（拿到后由我集成） =====
+  var s = document.createElement('script');
+  s.src = 'https://ss.adsterra.com/...your-ad-code...';
+  s.async = true;
+  document.head.appendChild(s);
+  */
+}
