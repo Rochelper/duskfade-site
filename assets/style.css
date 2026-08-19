@@ -309,6 +309,62 @@ img { max-width: 100%; height: auto; }
   box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4);
 }
 
+.btn-lg {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 18px;
+}
+
+/* ===== QUICK FACTS GRID ===== */
+.quick-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 28px 0 8px;
+}
+.qf-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.qf-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+.qf-value {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+/* ===== FAQ ITEMS ===== */
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+.faq-item h3 {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+  color: var(--text-bright);
+}
+.faq-item p {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--text);
