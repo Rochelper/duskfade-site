@@ -614,14 +614,34 @@
 
   /* ============================================================
      GA4 ENGAGED-READING EVENT
-     阅读满 60 秒触发，便于在 GA4 后台将其标记为“关键事件”
-     （路径：GA4 → 管理 → 关键事件 → 新建 key event = read_60s）
+     在 GA4 后台标记为"关键事件"后，可衡量真实阅读完成度。
+     （路径：GA4 → 管理 → 数据展示 → 关键事件 → 新建 key event = read_30s）
+     双触发条件（满足任一即触发，避免 60s 过长导致零数据）：
+       1) 页面停留 ≥ 30 秒
+       2) 滚动深度 ≥ 75%
      ============================================================ */
-  setTimeout(function () {
-    try {
-      if (typeof gtag === 'function') {
-        gtag('event', 'read_60s', { page_title: document.title, page_location: location.href });
-      }
-    } catch (e) { /* ignore */ }
-  }, 60000);
+  let _readFired = false;
+  function _fireRead(trigger) {
+    if (_readFired) return;
+    if (typeof gtag !== 'function') return;
+    _readFired = true;
+    gtag('event', 'read_30s', {
+      trigger_type: trigger,
+      page_title: document.title,
+      page_location: location.href
+    });
+  }
+  // 条件 1：停留 ≥ 30 秒
+  setTimeout(function () { _fireRead('time_30s'); }, 30000);
+  // 条件 2：滚动 ≥ 75%
+  let _maxScroll = 0;
+  function _onScroll() {
+    const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const winH = window.innerHeight;
+    const scrolled = window.scrollY + winH;
+    const pct = docH > 0 ? Math.min(100, Math.round(scrolled / docH * 100)) : 0;
+    if (pct > _maxScroll) _maxScroll = pct;
+    if (_maxScroll >= 75) _fireRead('scroll_75pct');
+  }
+  window.addEventListener('scroll', _onScroll, { passive: true });
 })();
