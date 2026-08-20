@@ -1541,3 +1541,27 @@ footer a { color: var(--accent); }
   .keyword-hub { padding: 20px; }
   .keyword-header h2 { font-size: 1.4rem; }
 }
+
+/* ============================================
+   ADSTERRA AD CONTAINER (GDPR-gated, footer slot)
+   ============================================ */
+.ad-wrap {
+  margin: 2.5rem auto;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+}
+.ad-wrap .ad-label {
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6a6a6a;
+  margin-bottom: .5rem;
+  font-family: var(--font-display);
+}
+.ad-wrap iframe,
+.ad-wrap ins {
+  margin: 0 auto;
+  display: block;
+}

@@ -699,11 +699,55 @@
 
 /* 用户接受 Cookie 后才注入 Adsterra 广告脚本（GDPR 合规）。
    等你在 Adsterra 后台拿到代码后，把下面 TODO 替换为对应 <script> 即可。 */
+/* Adsterra 广告：用户接受 Cookie 后才注入（GDPR 合规）。
+   广告位见 units 数组：
+     - 模式 A：atOptions + highperformanceformat.com/KEY/invoke.js（需串行，避免覆盖全局 atOptions）
+     - 模式 B：直接 src（effectivecpmnetwork.com 等）+ 自带 container，无 atOptions
+   多广告位用 onload 串行注入。 */
 function loadAdsterraAds() {
-  /* ===== TODO: 粘贴 Adsterra 广告代码（拿到后由我集成） =====
-  var s = document.createElement('script');
-  s.src = 'https://ss.adsterra.com/...your-ad-code...';
-  s.async = true;
-  document.head.appendChild(s);
-  */
+  if (window.__adsterraDone) return;
+  window.__adsterraDone = true;
+
+  // key=投放密钥, h/w=尺寸(模式A), src=直接脚本地址(模式B), mount=选择器, pos=插入位置, last=取最后一个匹配
+  var units = [
+    { key: '81185761d78de92c665c5f56e01df0ef', h: 60, w: 468, mount: 'main section', pos: 'after', last: true },
+    { key: '241b0cfa5bb44fd76bf7fd47e38f53e9', h: 50, w: 320, mount: 'main section', pos: 'after' },
+    { key: '33b438276cf1877a45588834e73f688f', src: 'https://pl30918601.effectivecpmnetwork.com/33b438276cf1877a45588834e73f688f/invoke.js', mount: 'footer', pos: 'before' }
+  ];
+
+  function makeMount(u) {
+    // 隐私政策页不放文章内广告，保持页面洁净（页脚广告仍保留）
+    if (location.pathname.indexOf('privacy.html') !== -1 && u.pos === 'after') return null;
+    var nodes = document.querySelectorAll(u.mount);
+    var target = u.last && nodes.length ? nodes[nodes.length - 1] : nodes[0];
+    if (!target) return null;
+    var box = document.createElement('div');
+    box.className = 'ad-wrap';
+    box.id = 'container-' + u.key;
+    box.innerHTML = '<span class="ad-label">Advertisement</span>';
+    if (u.pos === 'before' && target.parentNode) target.parentNode.insertBefore(box, target);
+    else if (u.pos === 'after' && target.parentNode) target.parentNode.insertBefore(box, target.nextSibling);
+    else target.appendChild(box);
+    return box;
+  }
+
+  function injectOne(i) {
+    if (i >= units.length) return;
+    var u = units[i];
+    var mount = makeMount(u);
+    if (!mount) { injectOne(i + 1); return; }
+    var s = document.createElement('script');
+    if (u.src) {
+      s.src = u.src;
+      s.async = true;
+      s.setAttribute('data-cfasync', 'false');
+    } else {
+      window.atOptions = { key: u.key, format: 'iframe', height: u.h, width: u.w, params: {} };
+      s.src = 'https://www.highperformanceformat.com/' + u.key + '/invoke.js';
+      s.async = false;
+    }
+    s.onload = s.onerror = function () { injectOne(i + 1); };
+    document.head.appendChild(s);
+  }
+  injectOne(0);
 }
