@@ -980,6 +980,16 @@ h3 {
   font-weight: 700;
 }
 
+/* Boss phase headings inside attack-pattern guides */
+.phase-title {
+  color: var(--gold);
+  border-left: 3px solid var(--gold);
+  padding-left: 12px;
+  margin: 26px 0 12px;
+  font-size: 1.18rem;
+  letter-spacing: 0.3px;
+}
+
 h4 {
   color: var(--accent);
   margin: 16px 0 8px;
