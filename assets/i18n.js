@@ -616,24 +616,25 @@
      GA4 ENGAGED-READING EVENT
      在 GA4 后台标记为"关键事件"后，可衡量真实阅读完成度。
      （路径：GA4 → 管理 → 数据展示 → 关键事件 → 新建 key event = read_30s）
-     双触发条件（满足任一即触发，避免 60s 过长导致零数据）：
-       1) 页面停留 ≥ 30 秒
-       2) 滚动深度 ≥ 75%
+     多触发条件（满足任一即触发）—— 因 60s/30s 都曾 0 触发，把门槛降到 20s + 50% 滚动
+     + 把触发逻辑用 dataLayer 兜底（即使 gtag 晚到也能缓存），避免 _fireRead 早 return
      ============================================================ */
   let _readFired = false;
   function _fireRead(trigger) {
     if (_readFired) return;
-    if (typeof gtag !== 'function') return;
     _readFired = true;
-    gtag('event', 'read_30s', {
-      trigger_type: trigger,
-      page_title: document.title,
-      page_location: location.href
-    });
+    var payload = { trigger_type: trigger, page_title: document.title, page_location: location.href };
+    if (typeof gtag === 'function') {
+      gtag('event', 'read_30s', payload);
+    } else {
+      // 兜底：gtag 还没就绪时先压入 dataLayer，等 gtag('js', new Date()) 触发时一次性发送
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ 'event': 'read_30s', ...payload });
+    }
   }
-  // 条件 1：停留 ≥ 30 秒
-  setTimeout(function () { _fireRead('time_30s'); }, 30000);
-  // 条件 2：滚动 ≥ 75%
+  // 条件 1：停留 ≥ 20 秒（从 30s 降到 20s，兼容平均互动 43s 但分布偏短）
+  setTimeout(function () { _fireRead('time_20s'); }, 20000);
+  // 条件 2：滚动 ≥ 50%（从 75% 降到 50%，更易触发）
   let _maxScroll = 0;
   function _onScroll() {
     const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
@@ -641,7 +642,7 @@
     const scrolled = window.scrollY + winH;
     const pct = docH > 0 ? Math.min(100, Math.round(scrolled / docH * 100)) : 0;
     if (pct > _maxScroll) _maxScroll = pct;
-    if (_maxScroll >= 75) _fireRead('scroll_75pct');
+    if (_maxScroll >= 50) _fireRead('scroll_50pct');
   }
   window.addEventListener('scroll', _onScroll, { passive: true });
 })();
