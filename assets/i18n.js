@@ -389,6 +389,14 @@
                              ja: 'ティックタウンのファッション NPC。外観衣装を集め、染色瓶（Flasks of Dye）で染め、パレットに最高の装いを見せて「The mask of pain」達成。',
                              es: 'La NPC de moda de Ciudad Tick. Reúne atuendos cosméticos, tiñelos con Frascos de Tinte y deslumbra a Palette con tu mejor look para el logro «The mask of pain».' },
 
+    /* ===== NEW PAGES (Aug 2026) ===== */
+    'ph.hltb.title':        { en: 'How Long to Beat',          zh: '通关时长',            ja: 'クリアにかかる時間',     es: 'Tiempo de juego' },
+    'ph.hltb.desc':         { en: 'Duskfade campaign length, full completion, and what pads the clock — 10 to 20 hours of clockpunk platforming.', zh: 'Duskfade 主线时长、全收集耗时与影响因素——10 到 20 小时的钟表朋克平台跳跃。', ja: 'Duskfade のストーリー時間、全収集、そして時を埋める要素 —— 10〜20 時間のクロックパンク。', es: 'Duración de la campaña, completación total y qué alarga el reloj — de 10 a 20 horas de plataformas clockpunk.' },
+    'ph.endings.title':     { en: 'Endings & Post-Game',       zh: '结局与结局后内容',     ja: 'エンディングと後日談',    es: 'Finales y post-juego' },
+    'ph.endings.desc':      { en: 'How many endings Duskfade has, what the finale reveals, and everything to do after the credits roll.', zh: 'Duskfade 有几个结局、结局揭示了什么，以及字幕结束后所有可做的事。', ja: 'Duskfade のエンディング数、結末の真意、そしてエンドロール後のやり込み要素。', es: 'Cuántos finales tiene Duskfade, qué revela el desenlace y todo lo que hacer tras los créditos.' },
+    'ph.secrets.title':     { en: 'Secrets & Collectibles',    zh: '隐藏要素与收集',       ja: '裏技とコレクション',      es: 'Secretos y coleccionables' },
+    'ph.secrets.desc':      { en: 'Every hidden collectible, Time Rift, and the stained-glass secret that unlocks Duskfade’s biggest mystery.', zh: '每一个隐藏收集品、时空裂隙挑战，以及揭示 Duskfade 最大秘密的彩色玻璃碎片。', ja: '全隠しコレクション、タイムリフト、そして最大の謎を解くステンドグラス。', es: 'Cada coleccionable oculto, el Time Rift y el vidrio pintado que revela el mayor misterio.' },
+
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
     'btn.viewguide':        { en: 'View Full Guide →',     zh: '查看完整攻略 →',      ja: '完全ガイドを見る →',    es: 'Ver guía completa →' },
@@ -666,36 +674,32 @@
   }
   injectPrivacyLink();
 
-  // 已同意 -> 直接加载广告（若用户之前接受过）
-  if (localStorage.getItem(CONSENT_KEY) === 'granted') {
+  // opt-out 模式：默认加载广告（CCPA / UK PECR 合规），仅当用户明确 Decline 才不加载
+  if (localStorage.getItem(CONSENT_KEY) !== 'denied') {
     loadAdsterraAds();
-    return;
   }
-  // 已拒绝 -> 不加载任何广告脚本
-  if (localStorage.getItem(CONSENT_KEY) === 'denied') return;
 
-  // 首次访问 -> 显示横幅
-  var bar = document.createElement('div');
-  bar.className = 'cookie-consent';
-  bar.id = 'cookieConsent';
-  bar.innerHTML =
-    '<div class="cc-text">We use cookies for analytics and third-party ads (Adsterra). ' +
-    'See our <a href="privacy.html">Privacy Policy</a>.</div>' +
-    '<div class="cc-btns">' +
-    '<button class="cc-btn cc-decline" id="ccDecline">Decline</button>' +
-    '<button class="cc-btn cc-accept" id="ccAccept">Accept</button>' +
-    '</div>';
-  document.body.appendChild(bar);
+  // 首次访问 -> 显示轻量告知横幅（不阻断，仅提供 Decline 让用户拒绝）
+  if (localStorage.getItem(CONSENT_KEY) === null) {
+    var bar = document.createElement('div');
+    bar.className = 'cookie-consent';
+    bar.id = 'cookieConsent';
+    bar.innerHTML =
+      '<div class="cc-text">We use cookies for analytics and third-party ads (Adsterra). ' +
+      'See our <a href="privacy.html">Privacy Policy</a>.</div>' +
+      '<div class="cc-btns">' +
+      '<button class="cc-btn cc-decline" id="ccDecline">Decline</button>' +
+      '</div>';
+    document.body.appendChild(bar);
 
-  document.getElementById('ccAccept').addEventListener('click', function () {
-    localStorage.setItem(CONSENT_KEY, 'granted');
-    bar.remove();
-    loadAdsterraAds();
-  });
-  document.getElementById('ccDecline').addEventListener('click', function () {
-    localStorage.setItem(CONSENT_KEY, 'denied');
-    bar.remove();
-  });
+    document.getElementById('ccDecline').addEventListener('click', function () {
+      localStorage.setItem(CONSENT_KEY, 'denied');
+      bar.remove();
+      // 移除已注入的广告容器（invoke.js 失去挂载点即停止展示）
+      var ads = document.querySelectorAll('.ad-wrap');
+      for (var i = 0; i < ads.length; i++) ads[i].remove();
+    });
+  }
 })();
 
 /* 用户接受 Cookie 后才注入 Adsterra 广告脚本（GDPR 合规）。
