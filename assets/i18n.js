@@ -397,6 +397,12 @@
     'ph.secrets.title':     { en: 'Secrets & Collectibles',    zh: '隐藏要素与收集',       ja: '裏技とコレクション',      es: 'Secretos y coleccionables' },
     'ph.secrets.desc':      { en: 'Every hidden collectible, Time Rift, and the stained-glass secret that unlocks Duskfade’s biggest mystery.', zh: '每一个隐藏收集品、时空裂隙挑战，以及揭示 Duskfade 最大秘密的彩色玻璃碎片。', ja: '全隠しコレクション、タイムリフト、そして最大の謎を解くステンドグラス。', es: 'Cada coleccionable oculto, el Time Rift y el vidrio pintado que revela el mayor misterio.' },
 
+    /* ===== NEW PAGES: UPDATES & LORE (Aug 2026) ===== */
+    'ph.updates.title':     { en: 'News & Updates',          zh: '新闻与更新',            ja: 'ニュースとアップデート',  es: 'Noticias y Actualizaciones' },
+    'ph.updates.desc':      { en: 'Release status, discount window, and the version timeline — tracked in one place.', zh: '发售状态、折扣窗口与版本时间线——集中追踪。', ja: '発売状況、セール期間、バージョン履歴を一か所で。', es: 'Estado de lanzamiento, ventana de descuento y cronología de versiones.' },
+    'ph.lore.title':        { en: 'Lore & World',            zh: '世界观与背景',          ja: '世界観と設定',          es: 'Lore y Mundo' },
+    'ph.lore.desc':         { en: 'The eternal night, the Clock Tower, and the five emotional bosses standing between Zirian and Allira.', zh: '永恒之夜、钟楼，以及挡在齐利安与阿莉拉之间的五位情绪 Boss。', ja: '永遠の夜、時計塔、そしてジリアンとアリーラの間に立ちふさがる5人の感情のボス。', es: 'La noche eterna, la Torre del Reloj y los cinco jefes emocionales entre Zirian y Allira.' },
+
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
     'btn.viewguide':        { en: 'View Full Guide →',     zh: '查看完整攻略 →',      ja: '完全ガイドを見る →',    es: 'Ver guía completa →' },
