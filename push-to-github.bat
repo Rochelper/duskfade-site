@@ -17,6 +17,11 @@ echo [2/3] Testing GitHub connection...
 git ls-remote origin HEAD 2>&1
 echo.
 
+echo [2.5/3] Staging and committing local changes...
+git add -A
+git commit -m "chore: site update %date% %time%" 2>nul || echo (no new changes to commit)
+echo.
+
 echo [3/3] Pushing to GitHub...
 git push -u origin main
 echo.
