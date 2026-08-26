@@ -403,6 +403,11 @@
     'ph.lore.title':        { en: 'Lore & World',            zh: '世界观与背景',          ja: '世界観と設定',          es: 'Lore y Mundo' },
     'ph.lore.desc':         { en: 'The eternal night, the Clock Tower, and the five emotional bosses standing between Zirian and Allira.', zh: '永恒之夜、钟楼，以及挡在齐利安与阿莉拉之间的五位情绪 Boss。', ja: '永遠の夜、時計塔、そしてジリアンとアリーラの間に立ちふさがる5人の感情のボス。', es: 'La noche eterna, la Torre del Reloj y los cinco jefes emocionales entre Zirian y Allira.' },
 
+    'ph.starthere.title':  { en: 'Start Here',            zh: '新手从这里开始',     ja: 'スタートガイド',       es: 'Empieza Aquí' },
+    'ph.starthere.desc':   { en: 'A 5-step roadmap from your first hour to the final boss — the fastest way to learn Duskfade.', zh: '从第一小时到最终 Boss 的 5 步路线图——最快上手 Duskfade。', ja: '最初の 1 時間から最終ボスまでの 5 ステップ — Duskfade を最速で理解。', es: 'Una ruta de 5 pasos desde tu primera hora hasta el jefe final — la forma más rápida de aprender Duskfade.' },
+    'ph.combat.title':     { en: 'Combat Guide',          zh: '战斗系统攻略',       ja: '戦闘ガイド',           es: 'Guía de Combate' },
+    'ph.combat.desc':      { en: 'Time-freeze dodge, deflects, stamina economy, and combo strings — how to actually win fights.', zh: '时间冻结闪避、弹反、体力管理与连招——如何真正打赢战斗。', ja: '時間停止回避、弾き、スタミナ管理、連携 — 実際に戦いを制する方法。', es: 'Esquiva de congelación, paradas, economía de aguante y combos — cómo ganar duelos de verdad.' },
+
     /* ===== COMMON BUTTONS ===== */
     'btn.readmore':         { en: 'Read more →',           zh: '阅读更多 →',          ja: '続きを読む →',         es: 'Leer más →' },
     'btn.viewguide':        { en: 'View Full Guide →',     zh: '查看完整攻略 →',      ja: '完全ガイドを見る →',    es: 'Ver guía completa →' },
