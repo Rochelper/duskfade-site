@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/boss-sorrow", "destination": "/boss-sadness.html", "permanent": true },
+    { "source": "/boss-sorrow.html", "destination": "/boss-sadness.html", "permanent": true },
+    { "source": "/boss-fear", "destination": "/boss-watcher.html", "permanent": true },
+    { "source": "/boss-fear.html", "destination": "/boss-watcher.html", "permanent": true },
+    { "source": "/boss-jealousy", "destination": "/boss-guide.html", "permanent": true },
+    { "source": "/boss-jealousy.html", "destination": "/boss-guide.html", "permanent": true }
+  ]
+}

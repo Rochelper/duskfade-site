@@ -66,12 +66,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.duskfade-guide.com/boss-sorrow.html</loc>
+    <loc>https://www.duskfade-guide.com/boss-guayota.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.duskfade-guide.com/boss-fear.html</loc>
+    <loc>https://www.duskfade-guide.com/boss-sadness.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.duskfade-guide.com/boss-watcher.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -92,11 +97,6 @@
   </url>
   <url>
     <loc>https://www.duskfade-guide.com/character-zirian.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.duskfade-guide.com/boss-jealousy.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -152,6 +152,11 @@
   </url>
   <url>
     <loc>https://www.duskfade-guide.com/combat.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.duskfade-guide.com/100-percent.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
