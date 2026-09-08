@@ -728,22 +728,33 @@
 /* Adsterra 广告：用户接受 Cookie 后才注入（GDPR 合规）。
    广告位见 units 数组：
      - 模式 A：atOptions + highperformanceformat.com/KEY/invoke.js（需串行，避免覆盖全局 atOptions）
-     - 模式 B：直接 src（effectivecpmnetwork.com 等）+ 自带 container，无 atOptions
-   多广告位用 onload 串行注入。 */
+     - 模式 B：直接 src（effectivecpmnetwork.com / Social Bar 等）+ 自带 container，无 atOptions
+     - 模式 C：fixed 粘性位（Social Bar 首选）：mount 写 'body'，pos='append'，会被 fixed 定位的脚本接管
+   多广告位用 onload 串行注入。
+
+   当前部署（2026-09-08 优化版）：
+     - 1 个内文 banner（仅在第 1 个内容 section 之后）→ 之前 2 个内文 banner 互相抢量
+     - 1 个页脚原生广告
+     - 1 个 Social Bar（粘性底部条，转化率高于 banner 2-3x）→ 替代原 effectivecpmnetwork
+   mount 选择器必须精确，避免广告覆盖主要内容。 */
 function loadAdsterraAds() {
   if (window.__adsterraDone) return;
   window.__adsterraDone = true;
 
   // key=投放密钥, h/w=尺寸(模式A), src=直接脚本地址(模式B), mount=选择器, pos=插入位置, last=取最后一个匹配
   var units = [
-    { key: '81185761d78de92c665c5f56e01df0ef', h: 60, w: 468, mount: 'main section', pos: 'after', last: true },
-    { key: '241b0cfa5bb44fd76bf7fd47e38f53e9', h: 50, w: 320, mount: 'main section', pos: 'after' },
-    { key: '33b438276cf1877a45588834e73f688f', src: 'https://pl30918601.effectivecpmnetwork.com/33b438276cf1877a45588834e73f688f/invoke.js', mount: 'footer', pos: 'before' }
+    // 内文 banner：固定插在 hero 之后第一个内容 section 后（避免遮挡标题/导航）
+    { key: '81185761d78de92c665c5f56e01df0ef', h: 60, w: 468, mount: 'main section.ad-mount-1', pos: 'after' },
+    // 页脚原生广告（effectivecpmnetwork 直脚本，自带 container）
+    { key: '33b438276cf1877a45588834e73f688f', src: 'https://pl30918601.effectivecpmnetwork.com/33b438276cf1877a45588834e73f688f/invoke.js', mount: 'footer', pos: 'before' },
+    // Social Bar（粘性底部条，转化率高于 banner 2-3x）
+    // TODO 上线前替换为 Adsterra 后台 Social Bar 单元的 真实 key
+    { key: 'SOCIALBAR_KEY_REPLACE_ME', src: 'https://pl30918601.effectivecpmnetwork.com/SOCIALBAR_KEY_REPLACE_ME/invoke.js', mount: 'body', pos: 'append', socialbar: true }
   ];
 
   function makeMount(u) {
-    // 隐私政策页不放文章内广告，保持页面洁净（页脚广告仍保留）
-    if (location.pathname.indexOf('privacy.html') !== -1 && u.pos === 'after') return null;
+    // 隐私政策页不放文章内广告，保持页面洁净（页脚广告 + Social Bar 仍保留）
+    if (location.pathname.indexOf('privacy.html') !== -1 && u.pos === 'after' && !u.socialbar) return null;
     var nodes = document.querySelectorAll(u.mount);
     var target = u.last && nodes.length ? nodes[nodes.length - 1] : nodes[0];
     if (!target) return null;
@@ -751,6 +762,11 @@ function loadAdsterraAds() {
     box.className = 'ad-wrap';
     box.id = 'container-' + u.key;
     box.innerHTML = '<span class="ad-label">Advertisement</span>';
+    if (u.socialbar) {
+      // Social Bar 模式：脚本会接管这个 div 自己做 fixed 定位，不需要插到内容流里
+      box.id = 'container-' + u.key;
+      box.style.minHeight = '60px';
+    }
     if (u.pos === 'before' && target.parentNode) target.parentNode.insertBefore(box, target);
     else if (u.pos === 'after' && target.parentNode) target.parentNode.insertBefore(box, target.nextSibling);
     else target.appendChild(box);
