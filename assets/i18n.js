@@ -36,6 +36,7 @@
     'footer.contact':   { en: 'Contact',  zh: '联系',   ja: 'お問い合わせ', es: 'Contacto' },
     'footer.review':    { en: 'Review',   zh: '评测',   ja: 'レビュー', es: 'Análisis' },
     'footer.sitemap':   { en: 'Sitemap',  zh: '站点地图', ja: 'サイトマップ', es: 'Mapa del sitio' },
+    'footer.privacy':   { en: 'Privacy',  zh: '隐私政策', ja: 'プライバシー', es: 'Privacidad' },
     'footer.disclaimer':{ en: 'Duskfade Guide & Wiki — Fan-made resource. Duskfade is a trademark of Weird Beluga.',
                           zh: 'Duskfade 攻略百科 — 粉丝制作资源。Duskfade 是 Weird Beluga 的商标。',
                           ja: 'Duskfade Guide & Wiki — ファン制作リソース。Duskfade は Weird Beluga の商標です。',
@@ -732,29 +733,32 @@
      - 模式 C：fixed 粘性位（Social Bar 首选）：mount 写 'body'，pos='append'，会被 fixed 定位的脚本接管
    多广告位用 onload 串行注入。
 
-   当前部署（2026-09-08 优化版）：
-     - 1 个内文 banner（仅在第 1 个内容 section 之后）→ 之前 2 个内文 banner 互相抢量
-     - 1 个页脚原生广告
-     - 1 个 Social Bar（粘性底部条，转化率高于 banner 2-3x）→ 替代原 effectivecpmnetwork
-   mount 选择器必须精确，避免广告覆盖主要内容。 */
+   当前部署（2026-09-11 修复版）：
+     回退了 09-08 的错误改动——当时把内文 banner 的 mount 改成 'main section.ad-mount-1'，
+     但该 class 只加在 4 个页面上，导致其余 32 个页面的内文广告位全部挂载失败、展示量归零。
+     现改回 'main section'（全站有效），并新增「超时保护」，避免慢/死的脚本阻塞后续广告位。
+
+   广告位：
+     - 2 个内文 banner（两个 highperformanceformat key，实测均返回 200）
+     - 1 个页脚原生广告（effectivecpmnetwork 直脚本，放在最后，即使不可达也不阻塞前面）
+   注意：注入是串行的（前一个 onload 才进下一个），所以顺序按「可靠性从高到低」排列。 */
 function loadAdsterraAds() {
   if (window.__adsterraDone) return;
   window.__adsterraDone = true;
 
   // key=投放密钥, h/w=尺寸(模式A), src=直接脚本地址(模式B), mount=选择器, pos=插入位置, last=取最后一个匹配
   var units = [
-    // 内文 banner：固定插在 hero 之后第一个内容 section 后（避免遮挡标题/导航）
-    { key: '81185761d78de92c665c5f56e01df0ef', h: 60, w: 468, mount: 'main section.ad-mount-1', pos: 'after' },
-    // 页脚原生广告（effectivecpmnetwork 直脚本，自带 container）
-    { key: '33b438276cf1877a45588834e73f688f', src: 'https://pl30918601.effectivecpmnetwork.com/33b438276cf1877a45588834e73f688f/invoke.js', mount: 'footer', pos: 'before' },
-    // Social Bar（粘性底部条，转化率高于 banner 2-3x）
-    // TODO 上线前替换为 Adsterra 后台 Social Bar 单元的 真实 key
-    { key: 'SOCIALBAR_KEY_REPLACE_ME', src: 'https://pl30918601.effectivecpmnetwork.com/SOCIALBAR_KEY_REPLACE_ME/invoke.js', mount: 'body', pos: 'append', socialbar: true }
+    // 内文 banner：插在正文最后一个 section 之后（读者读完正文才看到，不打断阅读；全站有效）
+    { key: '81185761d78de92c665c5f56e01df0ef', h: 60, w: 468, mount: 'main section', pos: 'after', last: true },
+    // 内文 banner 2：插在第一个 section 之后
+    { key: '241b0cfa5bb44fd76bf7fd47e38f53e9', h: 50, w: 320, mount: 'main section', pos: 'after' },
+    // 页脚原生广告（放最后：该域名 pl30918601.effectivecpmnetwork.com 若不可达，不影响前面两个）
+    { key: '33b438276cf1877a45588834e73f688f', src: 'https://pl30918601.effectivecpmnetwork.com/33b438276cf1877a45588834e73f688f/invoke.js', mount: 'footer', pos: 'before' }
   ];
 
   function makeMount(u) {
-    // 隐私政策页不放文章内广告，保持页面洁净（页脚广告 + Social Bar 仍保留）
-    if (location.pathname.indexOf('privacy.html') !== -1 && u.pos === 'after' && !u.socialbar) return null;
+    // 隐私政策页不放文章内广告，保持页面洁净（页脚广告仍保留）
+    if (location.pathname.indexOf('privacy.html') !== -1 && u.pos === 'after') return null;
     var nodes = document.querySelectorAll(u.mount);
     var target = u.last && nodes.length ? nodes[nodes.length - 1] : nodes[0];
     if (!target) return null;
@@ -762,11 +766,6 @@ function loadAdsterraAds() {
     box.className = 'ad-wrap';
     box.id = 'container-' + u.key;
     box.innerHTML = '<span class="ad-label">Advertisement</span>';
-    if (u.socialbar) {
-      // Social Bar 模式：脚本会接管这个 div 自己做 fixed 定位，不需要插到内容流里
-      box.id = 'container-' + u.key;
-      box.style.minHeight = '60px';
-    }
     if (u.pos === 'before' && target.parentNode) target.parentNode.insertBefore(box, target);
     else if (u.pos === 'after' && target.parentNode) target.parentNode.insertBefore(box, target.nextSibling);
     else target.appendChild(box);
@@ -779,6 +778,10 @@ function loadAdsterraAds() {
     var mount = makeMount(u);
     if (!mount) { injectOne(i + 1); return; }
     var s = document.createElement('script');
+    var advanced = false;
+    function next() { if (advanced) return; advanced = true; injectOne(i + 1); }
+    // 超时保护：慢/死的脚本 3.5s 后强制跳过，避免阻塞后续广告位
+    var timer = setTimeout(next, 3500);
     if (u.src) {
       s.src = u.src;
       s.async = true;
@@ -788,7 +791,7 @@ function loadAdsterraAds() {
       s.src = 'https://www.highperformanceformat.com/' + u.key + '/invoke.js';
       s.async = false;
     }
-    s.onload = s.onerror = function () { injectOne(i + 1); };
+    s.onload = s.onerror = function () { clearTimeout(timer); next(); };
     document.head.appendChild(s);
   }
   injectOne(0);
